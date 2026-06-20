@@ -33,7 +33,7 @@ jobs:
 
       - name: Publish
         if: github.ref == 'refs/heads/main'
-        run: dotnet publish ./src/MyApi/MyApi.csproj -c Release -o ./publish
+        run: dotnet publish ./src/weather_Service.csproj -c Release -o ./publish
 
       - name: Upload artifact
         if: github.ref == 'refs/heads/main'
