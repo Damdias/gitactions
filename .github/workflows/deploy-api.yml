@@ -45,7 +45,7 @@ jobs:
           path: ./publish
   deploy-develop:
     needs: build-test-scan
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
     environment: dev
 
