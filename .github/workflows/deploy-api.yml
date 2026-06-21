@@ -81,13 +81,13 @@ jobs:
     #   contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      # - uses: actions/checkout@v4
 
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: api-package
-          path: ./publish
+      # - name: Download artifact
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: api-package
+      #     path: ./publish
 
       - uses: azure/login@v2
         with:
@@ -95,12 +95,21 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Deploy
-        uses: azure/webapps-deploy@v3
+      # - name: Deploy
+      #   uses: azure/webapps-deploy@v3
+      #   with:
+      #     app-name: watherservice
+      #     slot-name: staging
+      #     package: ./publish
+      - name: Swap staging to production
+        uses: azure/CLI@v2
         with:
-          app-name: watherservice
-          slot-name: staging
-          package: ./publish
+          inlineScript: |
+            az webapp deployment slot swap \
+              --name watherservice \
+              --resource-group watherservice_group \
+              --slot develop \
+              --target-slot staging
 
   deploy-production:
     if: github.ref == 'refs/heads/main'
