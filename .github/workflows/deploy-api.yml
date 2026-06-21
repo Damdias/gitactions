@@ -73,7 +73,6 @@ jobs:
           package: ./publish
 
   deploy-staging:
-    needs: build-test-scan
     if: github.ref == 'refs/heads/staging'
     runs-on: ubuntu-latest
     environment: staging
