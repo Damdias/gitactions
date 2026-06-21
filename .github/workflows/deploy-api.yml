@@ -62,7 +62,8 @@ jobs:
       - name: Deploy
         uses: azure/webapps-deploy@v3
         with:
-          app-name: your-app-service-name
+          app-name: watherservice
+          slot-name: staging
           package: ./publish
 
   deploy-production:
