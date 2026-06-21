@@ -84,7 +84,7 @@ jobs:
         with:
           inlineScript: |
             az webapp deployment slot swap \
-              --name your-app-service-name \
-              --resource-group your-resource-group \
+              --name watherservice \
+              --resource-group watherservice_group \
               --slot staging \
               --target-slot production
