@@ -12,6 +12,7 @@ permissions:
 jobs:
   build-test-scan:
     runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/main'
 
     steps:
       - uses: actions/checkout@v4
@@ -72,7 +73,6 @@ jobs:
           package: ./publish
 
   deploy-staging:
-    needs: build-test-scan
     if: github.ref == 'refs/heads/staging'
     runs-on: ubuntu-latest
     environment: staging
@@ -103,9 +103,12 @@ jobs:
           package: ./publish
 
   deploy-production:
-    needs: deploy-staging
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: production
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
       - uses: azure/login@v2
