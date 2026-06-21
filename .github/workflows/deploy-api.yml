@@ -32,13 +32,13 @@ jobs:
 
       - name: Dependency vulnerability scan
         run: dotnet list package --vulnerable --include-transitive
-
+          
       - name: Publish
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
         run: dotnet publish ./src/weather_Service.csproj -c Release -o ./publish
 
       - name: Upload artifact
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
         uses: actions/upload-artifact@v4
         with:
           name: api-package
@@ -76,9 +76,9 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: staging
-    permissions:
-      id-token: write
-      contents: read
+    # permissions:
+    #   id-token: write
+    #   contents: read
 
     steps:
       - uses: actions/checkout@v4
