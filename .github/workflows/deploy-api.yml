@@ -2,10 +2,10 @@ name: ASP.NET API CI/CD
 
 on:
   pull_request:
-    branches: [ main,develop ]
+    branches: [ main,develop,staging ]
 
   push:
-    branches: [ main,develop ]
+    branches: [ main,staging,develop ]
 permissions:
   id-token: write
   contents: read
