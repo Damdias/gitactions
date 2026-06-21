@@ -32,7 +32,7 @@ jobs:
 
       - name: Dependency vulnerability scan
         run: dotnet list package --vulnerable --include-transitive
-          
+
       - name: Publish
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
         run: dotnet publish ./src/weather_Service.csproj -c Release -o ./publish
@@ -47,7 +47,7 @@ jobs:
     needs: build-test-scan
     if: github.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
-    environment: dev
+    environment: develop
 
     steps:
       - uses: actions/checkout@v4
