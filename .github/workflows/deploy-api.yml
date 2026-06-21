@@ -77,6 +77,9 @@ jobs:
     needs: deploy-staging
     runs-on: ubuntu-latest
     environment: production
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
       - uses: azure/login@v2
